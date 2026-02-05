@@ -1,0 +1,18 @@
+all:
+  children:
+    jenkins:
+      hosts:
+        jenkins108:
+          ansible_host: ec2-13-218-189-30.compute-1.amazonaws.com
+          ansible_user: ubuntu
+          ansible_ssh_private_key_file: ~/.ssh/projectkeypir
+          ansible_python_interpreter: /usr/bin/python3
+
+    app:
+      hosts:
+        app108:
+          ansible_host: ec2-18-213-218-65.compute-1.amazonaws.com
+          ansible_user: ubuntu
+          ansible_ssh_private_key_file: ~/.ssh/projectkeypir
+          ansible_python_interpreter: /usr/bin/python3
+            ##  ansible_ssh_common_args: '-o ProxyJump=ubuntu@ec2-44-202-207-46.compute-1.amazonaws.com'
