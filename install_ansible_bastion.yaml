@@ -1,0 +1,35 @@
+---
+- name: Install Ansible on Bastion server
+  hosts: bastion
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - software-properties-common
+        - python3-pip
+
+    - name: Add Ansible PPA
+      apt_repository:
+        repo: ppa:ansible/ansible
+        state: present
+
+    - name: Install Ansible
+      apt:
+        name: ansible
+        state: present
+        update_cache: yes
+
+    - name: Verify Ansible installation
+      command: ansible --version
+      register: ansible_version
+
+    - name: Show Ansible version
+      debug:
+        var: ansible_version.stdout
